@@ -4,7 +4,7 @@ Este es un proyecto base de Python configurado con herramientas modernas de desa
 
 ## Características
 
-- Gestión de dependencias con Pipenv
+- Gestión de dependencias con Conda
 - Tipado estático con MyPy
 - Formateo de código con Black
 - Linting con Ruff
@@ -13,89 +13,50 @@ Este es un proyecto base de Python configurado con herramientas modernas de desa
 
 ## Requisitos previos
 
-- Python 3.10 o superior
-- Pipenv
-- Anaconda (opcional, pero recomendado para gestión de entornos)
+- Anaconda o Miniconda ([https://www.anaconda.com/products/distribution](https://www.anaconda.com/products/distribution))
 
-## Instalación
+## Configuración inicial del proyecto
 
-### Usando Anaconda
+1. Modifica el archivo `environment.yml` con el nombre de tu proyecto:
 
-1. Instala Anaconda desde [https://www.anaconda.com/products/distribution](https://www.anaconda.com/products/distribution)
-
-2. Crea un entorno conda:
-
-   ```bash
-   conda create -n proyecto-python python=3.10
-   conda activate proyecto-python
+   ```yaml
+   name: nombre-de-tu-proyecto # Cambia esto
+   channels:
+     - conda-forge
+     - defaults
+   dependencies:
+     - python=3.10
+     # Añade aquí tus dependencias
    ```
 
-3. Instala pipenv:
-
-   ```bash
-   conda install -c conda-forge pipenv
-   ```
-
-4. Instala las dependencias del proyecto:
-   ```bash
-   pipenv install --dev
-   ```
-
-### Sin Anaconda
-
-1. Asegúrate de tener Python 3.10+ instalado:
-
-   ```bash
-   python --version
-   ```
-
-2. Instala pipenv:
-
-   ```bash
-   pip install pipenv
-   ```
-
-3. Instala las dependencias del proyecto:
-
-   ```bash
-   # Instalar dependencias principales
-   conda install numpy pandas matplotlib scikit-learn
-
-   # Instalar herramientas de desarrollo
-   conda install black pytest
-   conda install -c conda-forge mypy ruff pre-commit jupyter
-
-   # Para paquetes no disponibles en conda
-   pip install paquete-especial
-   ```
-
-4. Exportar el entorno para compartir:
-
-   ```bash
-   conda env export > environment.yml
-   ```
-
-5. Para recrear el entorno en otro sistema:
+2. Crea el entorno virtual con las dependencias:
 
    ```bash
    conda env create -f environment.yml
    ```
 
+3. Activa el entorno virtual:
+
+   ```bash
+   conda activate nombre-de-tu-proyecto
    ```
 
+4. Configura los pre-commit hooks:
+   ```bash
+   pre-commit install
    ```
 
-## Configuración del entorno de desarrollo
+## Uso diario del proyecto
 
 1. Activa el entorno virtual:
 
    ```bash
-   conda activate proyecto-python
+   conda activate nombre-de-tu-proyecto
    ```
 
-2. Configura los pre-commit hooks:
+2. Para desactivar el entorno cuando termines:
    ```bash
-   pre-commit install
+   conda deactivate
    ```
 
 ## Ejecutar el proyecto
@@ -130,3 +91,19 @@ proyecto-python/
 - [Ruff](https://github.com/astral-sh/ruff) - Linter y formateador
 - [Mypy](https://github.com/pre-commit/mirrors-mypy) - Tipado estático
 - [Jupyter Notebook](https://jupyter.org/) - Entorno de desarrollo interactivo
+
+## Gestión de dependencias
+
+Si necesitas añadir nuevas dependencias al proyecto:
+
+1. Instala el paquete con conda:
+
+   ```bash
+   conda install nombre_paquete
+   ```
+
+2. Actualiza el archivo environment.yml:
+
+   ```bash
+   conda env export --from-history > environment.yml
+   ```
